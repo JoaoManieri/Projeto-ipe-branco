@@ -1,6 +1,8 @@
 package br.com.manieri.ipe_branco.ui.inicialization
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,6 +89,7 @@ class RegisterFragment : Fragment() {
                         findNavController().navigate(R.id.action_registerFragment_to_userScreenFragment)
                     }.addOnFailureListener {
                         Toast.makeText(requireContext(), "Não foi possivel fazer o cadastro!", Toast.LENGTH_SHORT).show()
+                        Log.w(TAG, "onViewCreated: $it", )
                     }
             }
         }
