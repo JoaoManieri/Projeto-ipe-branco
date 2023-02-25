@@ -60,12 +60,14 @@ class DiscussionFragment : Fragment() {
         }
 
         binding.backScreenImageButon.setOnClickListener {
-            findNavController().navigate(R.id.action_questionFragment_to_userScreenFragment)
+            findNavController().navigate(R.id.action_discussionFragment_to_userScreenFragment)
         }
 
         binding.responseButton.setOnClickListener {
-            findNavController().navigate(R.id.action_questionFragment_to_responseFragment2)
+            findNavController().navigate(R.id.action_userScreenFragment_to_discussionFragment)
         }
 
     }
+
+
 }

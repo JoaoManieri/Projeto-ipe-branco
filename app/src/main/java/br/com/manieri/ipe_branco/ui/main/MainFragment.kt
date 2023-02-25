@@ -93,7 +93,7 @@ class MainFragment : Fragment() {
         selectCard.observe(viewLifecycleOwner) {
             Log.w(TAG, "onViewCreated ZZZZZZZZZZZZZZZZZZZZZZZZ: ${it.discussion_uid}", )
             DiscussionViewModel.discussion = it
-            findNavController().navigate(R.id.action_userScreenFragment_to_questionFragment)
+            findNavController().navigate(R.id.action_userScreenFragment_to_discussionFragment)
         }
 
         binding.floatingActionButton.setOnClickListener {
