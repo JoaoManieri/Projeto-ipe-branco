@@ -91,8 +91,8 @@ class MainFragment : Fragment() {
         binding.nameUserLabel.text = "Olá, ${AppDataBase.getInstance().userDao().getName()}!"
 
         selectCard.observe(viewLifecycleOwner) {
-            Log.w(TAG, "onViewCreated ZZZZZZZZZZZZZZZZZZZZZZZZ: ${it.discussion_uid}", )
             DiscussionViewModel.discussion = it
+            Log.w(TAG, "onViewCreated: Depois do card selecionado", )
             findNavController().navigate(R.id.action_userScreenFragment_to_discussionFragment)
         }
 

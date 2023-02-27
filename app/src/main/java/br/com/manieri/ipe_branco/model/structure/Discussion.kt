@@ -8,6 +8,7 @@ data class Discussion(
 
     var type: Int,
     var discution_title: String,
+    var responses : Int,
 
     var up_votes: Int,
     var down_votes: Int,

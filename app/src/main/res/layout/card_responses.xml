@@ -69,11 +69,13 @@
         <TextView
 
             android:id="@+id/bodyResponse"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="TextView"
+            android:layout_marginEnd="10dp"
+            android:text="Lorem ipsum dolor sit amet. Est sequi tenetur hic dolores placeat rem nobis laudantium et ipsum tenetur ad voluptatem debitis est incidunt consequuntur eum eveniet repudiandae! Qui explicabo necessitatibus ex tempore mollitia quo quis quae et numquam perferendis qui ullam veritatis eos excepturi harum.  Qui autem similique eos dolor sapiente a neque temporibus eum sint delectus qui nobis fugiat et accusantium sint 33 sapiente rerum. Ea perferendis velit ab accusamus consequatur eos quibusdam voluptates est neque enim eum rerum quos qui reprehenderit nihil et consequatur odio. Ut tenetur illum et blanditiis sunt At voluptatum Quis ex impedit fuga id quia molestias. Qui unde repellat sit laborum tempora qui blanditiis ratione est repudiandae atque rem sunt odio.  In velit reprehenderit est tempora atque est praesentium culpa et impedit amet est sint sunt est nobis laborum. Aut deleniti blanditiis vel eveniet dolores aut debitis consequatur ut cumque voluptatibus et corporis officia et iusto omnis."
+            android:typeface="sans"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

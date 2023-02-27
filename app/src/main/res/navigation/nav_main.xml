@@ -36,7 +36,11 @@
             app:destination="@id/initDiscossionFragment" />
         <action
             android:id="@+id/action_userScreenFragment_to_discussionFragment"
-            app:destination="@id/discussionFragment" />
+            app:destination="@id/discussionFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/userScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -92,6 +96,9 @@
         tools:layout="@layout/fragment_question" >
         <action
             android:id="@+id/action_discussionFragment_to_userScreenFragment"
-            app:destination="@id/userScreenFragment" />
+            app:destination="@id/userScreenFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
     </fragment>
 </navigation>

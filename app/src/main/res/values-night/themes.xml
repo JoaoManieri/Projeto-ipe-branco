@@ -13,4 +13,12 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="BottonSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottonSheetStyle</item>
+    </style>
+    <style name="BottonSheetStyle" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

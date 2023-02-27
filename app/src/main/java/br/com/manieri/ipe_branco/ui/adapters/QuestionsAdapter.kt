@@ -32,6 +32,8 @@ class QuestionsAdapter(var discussionMainVisualizer: ArrayList<Discussion>, val 
             holder.downVote.setImageResource(R.drawable.negative_vote)
         }
 
+        holder.count_responses.text = discussionMainVisualizer[position].responses.toString()
+
         holder.qttUpVote.text = discussionMainVisualizer[position].up_votes.toString()
         holder.qttDownVote.text = discussionMainVisualizer[position].down_votes.toString()
 
@@ -59,6 +61,8 @@ class QuestionsAdapter(var discussionMainVisualizer: ArrayList<Discussion>, val 
 
         var qttUpVote: TextView = itemView.findViewById(R.id.qttUpVote)
         var qttDownVote: TextView = itemView.findViewById(R.id.qttDown)
+
+        var count_responses : TextView = itemView.findViewById(R.id.count_responses)
 
         var card: CardView = itemView.findViewById(R.id.cardquestions)
 

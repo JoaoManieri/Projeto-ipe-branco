@@ -23,7 +23,11 @@ class MainFragmentViewModel : ViewModel() {
 
 
             firestore = FirebaseFirestore.getInstance()
-            firestore.collection("Discussion").get().addOnSuccessListener { documents ->
+            // Create a reference to the cities collection
+            val doc = firestore.collection("Discussion")
+
+            // Create a query against the collection.
+            doc.whereEqualTo("type", 0).get().addOnSuccessListener { documents ->
                 documents.forEach {
                     Log.w(TAG, "getQuestionList: ${it.get("body_question").toString()} ")
                     listDiscussion.add(
@@ -34,6 +38,7 @@ class MainFragmentViewModel : ViewModel() {
                             type = it.get("type").toString().toInt(),
                             discution_title = it.get("discution_title").toString(),
                             up_votes = it.get("up_votes").toString().toInt(),
+                            responses = it.data["reponses"].toString().toInt(),
                             down_votes = it.get("down_votes").toString().toInt(),
                             body_question = it.get("body_question").toString(),
                             userName = it.get("userName").toString()
