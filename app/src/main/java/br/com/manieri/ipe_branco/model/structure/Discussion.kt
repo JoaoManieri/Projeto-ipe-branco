@@ -15,5 +15,6 @@ data class Discussion(
     var body_question: String,
 
     var userName: String,
+    var userVote: Int?
 
     )

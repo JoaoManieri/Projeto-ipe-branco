@@ -51,6 +51,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         val list = arrayListOf<TopSearches>(
             TopSearches(0, "P1900"),
             TopSearches(1, "Ventoinha"),

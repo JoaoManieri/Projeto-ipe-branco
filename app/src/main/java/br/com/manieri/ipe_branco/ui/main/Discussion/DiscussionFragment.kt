@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.widget.MenuPopupWindow
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -70,6 +69,7 @@ class DiscussionFragment : Fragment() {
         val popup = PopupMenu(requireContext(), view)
         popup.inflate(R.menu.menu_discussion)
 
+
         popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
 
             when (item!!.itemId) {
@@ -89,14 +89,15 @@ class DiscussionFragment : Fragment() {
         popup.show()
     }
 
-    fun crateList(){
+    fun crateList() {
         viewModel.createDiscussion()
-
         viewModel.getDataDiscussion.observe(viewLifecycleOwner) {
+
             it.forEach {
                 Log.w("Depuração leituras", "onActivityCreated: ${it.body_question}")
+
             }
-            mainAdapter = DiscutionAdapter(it)
+            mainAdapter = DiscutionAdapter(it, viewModel)
             binding.questionsAndResponses.adapter = mainAdapter
         }
     }

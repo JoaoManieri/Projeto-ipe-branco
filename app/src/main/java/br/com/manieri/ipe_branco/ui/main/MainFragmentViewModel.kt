@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.manieri.ipe_branco.model.structure.Discussion
+import br.com.manieri.ipe_branco.util.Constants.Companion.NO_VOTE
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -15,12 +16,31 @@ class MainFragmentViewModel : ViewModel() {
     lateinit var firestore: FirebaseFirestore
     var ObserverListQuestion = MutableLiveData<ArrayList<Discussion>>()
 
+    var fireStore = FirebaseFirestore.getInstance()
+
+    fun getVote(
+        user_unique_uid: String,
+        discussion_unique_uid: String,
+    ): Int {
+
+        var vote = NO_VOTE
+
+        val doc = fireStore.collection("VotesController")
+        val data = doc.whereEqualTo(user_unique_uid, discussion_unique_uid).limit(40)
+        data.get().addOnSuccessListener { it ->
+            Log.w(TAG, "getVote: sucess mesmo sem votos ")
+            it.forEach {
+                vote = it.data["vote_type"].toString().toInt()
+            }
+        }
+
+        return vote
+    }
 
     fun getQuestionList() {
 
         GlobalScope.launch(Dispatchers.IO) {
             var listDiscussion = arrayListOf<Discussion>()
-
 
             firestore = FirebaseFirestore.getInstance()
             // Create a reference to the cities collection
@@ -41,7 +61,8 @@ class MainFragmentViewModel : ViewModel() {
                             responses = it.data["reponses"].toString().toInt(),
                             down_votes = it.get("down_votes").toString().toInt(),
                             body_question = it.get("body_question").toString(),
-                            userName = it.get("userName").toString()
+                            userName = it.get("userName").toString(),
+                            userVote = getVote(it.get("user_uid").toString(), it.get("unique_uid").toString())
                         )
                     )
                 }
