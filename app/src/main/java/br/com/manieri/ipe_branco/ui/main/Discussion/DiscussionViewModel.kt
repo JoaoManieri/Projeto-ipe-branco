@@ -115,6 +115,8 @@ class DiscussionViewModel : ViewModel() {
                         out.add(Discussion("LabelResponse", "", "", 0, "", 0, 0, 0, "0", "", 0))
                     }
 
+                    val old_vote = getVote(it.data["user_uid"].toString(), it.data["unique_uid"].toString())
+
                     Log.w("Depuração resposta", "createDiscussion: ${it.data}")
 
                     val upVote = it.data["up_votes"].toString()
@@ -132,10 +134,7 @@ class DiscussionViewModel : ViewModel() {
                             down_votes = downVotes.toInt(),
                             body_question = it.data["body_question"].toString(),
                             userName = it.data["userName"].toString(),
-                            userVote = getVote(
-                                it.data["user_uid"].toString(),
-                                it.data["unique_uid"].toString()
-                            )
+                            userVote = old_vote
                         )
                     )
                     i++

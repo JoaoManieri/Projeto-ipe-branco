@@ -59,18 +59,13 @@ class DiscutionAdapter(val discutionList: ArrayList<Discussion>, val viewModel: 
             holder.bodyContenttext.text = discutionList[position].body_question
             holder.userNameSignature.text = discutionList[position].userName
 
-            val vote = discutionList[position].user_uid?.let { discutionList[position].unique_uid?.let { it1 ->
-                viewModel.getVote(it,
-                    it1
-                )
-            } }
-            Log.w(TAG, "onBindViewHolder: $vote", )
-
-            if (vote == UP_VOTE_SETED){
+            Log.w(TAG, "onBindViewHolder: ${discutionList[position].userVote}", )
+            
+            if (discutionList[position].userVote == UP_VOTE_SETED){
                 holder.upVote.setImageResource(R.drawable.positive_vote)
             }
 
-            if (vote == DOWN_VOTE_SETED){
+            if (discutionList[position].userVote == DOWN_VOTE_SETED){
                 holder.downVote.setImageResource(R.drawable.negative_vote)
             }
 
