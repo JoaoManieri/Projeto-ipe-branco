@@ -26,10 +26,6 @@ class DiscutionAdapter(val discutionList: ArrayList<Discussion>, val viewModel: 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        discutionList.forEach {
-            Log.w("Depuração resposta", "onCreateViewHolder: ${it.body_question}")
-        }
-
         lateinit var output: View
 
         if (viewType == TOP_ITEM_DISCUSSION) {
@@ -59,12 +55,7 @@ class DiscutionAdapter(val discutionList: ArrayList<Discussion>, val viewModel: 
             holder.bodyContenttext.text = discutionList[position].body_question
             holder.userNameSignature.text = discutionList[position].userName
 
-            val vote = discutionList[position].user_uid?.let { discutionList[position].unique_uid?.let { it1 ->
-                viewModel.getVote(it,
-                    it1
-                )
-            } }
-            Log.w(TAG, "onBindViewHolder: $vote", )
+            val vote = discutionList[position].userVote
 
             if (vote == UP_VOTE_SETED){
                 holder.upVote.setImageResource(R.drawable.positive_vote)

@@ -28,7 +28,6 @@ class MainFragmentViewModel : ViewModel() {
         val doc = fireStore.collection("VotesController")
         val data = doc.whereEqualTo(user_unique_uid, discussion_unique_uid).limit(40)
         data.get().addOnSuccessListener { it ->
-            Log.w(TAG, "getVote: sucess mesmo sem votos ")
             it.forEach {
                 vote = it.data["vote_type"].toString().toInt()
             }
@@ -49,7 +48,6 @@ class MainFragmentViewModel : ViewModel() {
             // Create a query against the collection.
             doc.whereEqualTo("type", 0).get().addOnSuccessListener { documents ->
                 documents.forEach {
-                    Log.w(TAG, "getQuestionList: ${it.get("body_question").toString()} ")
                     listDiscussion.add(
                         Discussion(
                             discussion_uid = it.get("discussion_uid").toString(),

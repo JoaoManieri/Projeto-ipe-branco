@@ -22,6 +22,8 @@ import br.com.manieri.ipe_branco.model.structure.TopSearches
 import br.com.manieri.ipe_branco.ui.adapters.HorizontalAdapter
 import br.com.manieri.ipe_branco.ui.adapters.QuestionsAdapter
 import br.com.manieri.ipe_branco.ui.main.Discussion.DiscussionViewModel
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import kotlin.math.log
 
 
@@ -51,7 +53,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        testerJoin()
 
         val list = arrayListOf<TopSearches>(
             TopSearches(0, "P1900"),
@@ -75,7 +77,6 @@ class MainFragment : Fragment() {
         binding.allNotices.adapter = mainAdapter
 
         viewModel.ObserverListQuestion.observe(viewLifecycleOwner) {
-            Log.w(TAG, "onViewCreated: Entrou")
             mAdapter.update(it)
         }
 
@@ -103,5 +104,27 @@ class MainFragment : Fragment() {
         }
 
     }
+
+    private fun testerJoin() {
+        Log.w(TAG, "testerJoin: Entrou", )
+        var db = FirebaseFirestore.getInstance()
+        db.collection("Discussion")
+            .document("AjRF4NMFOf3XfGGRRjmx").collection("VotesController").get().addOnSuccessListener {
+
+                it.forEach {
+                    Log.w(TAG, "testerJoin: ${it.data}", )
+                    
+                }
+//                val userId = it.data?.get("user_uid")
+//                val uniqueId = "fkuvklvAqJxgb5gNM1Kr" //it.data?.get("unique_uid")
+//
+//                db.collection("VotesController").document("${userId}+${uniqueId}").get().addOnSuccessListener {
+//
+//                    Log.w(TAG, "testerJoin: ${userId}+${uniqueId}", )
+//                    Log.w(TAG, "testerJoin: ${it.data}" )
+//                }
+            }
+    }
+
 
 }

@@ -93,10 +93,6 @@ class DiscussionFragment : Fragment() {
         viewModel.createDiscussion()
         viewModel.getDataDiscussion.observe(viewLifecycleOwner) {
 
-            it.forEach {
-                Log.w("Depuração leituras", "onActivityCreated: ${it.body_question}")
-
-            }
             mainAdapter = DiscutionAdapter(it, viewModel)
             binding.questionsAndResponses.adapter = mainAdapter
         }
