@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import br.com.manieri.ipe_branco.R
 import br.com.manieri.ipe_branco.model.structure.Discussion
+import br.com.manieri.ipe_branco.util.Constants
 
 class QuestionsAdapter(var discussionMainVisualizer: ArrayList<Discussion>, val selectCard : MutableLiveData<Discussion>) :
     RecyclerView.Adapter<QuestionsAdapter.ViewHolder>() {
@@ -26,9 +27,14 @@ class QuestionsAdapter(var discussionMainVisualizer: ArrayList<Discussion>, val 
         holder.questionsName.text = discussionMainVisualizer[position].discution_title
         holder.textResume.text = discussionMainVisualizer[position].body_question
 
-        if (discussionMainVisualizer[position].up_votes > discussionMainVisualizer[position].down_votes) {
+
+        val vote = discussionMainVisualizer[position].userVote
+
+        if (vote == Constants.UP_VOTE_SETED) {
             holder.upVote.setImageResource(R.drawable.positive_vote)
-        } else if (discussionMainVisualizer[position].down_votes > discussionMainVisualizer[position].up_votes) {
+        }
+
+        if (vote == Constants.DOWN_VOTE_SETED) {
             holder.downVote.setImageResource(R.drawable.negative_vote)
         }
 

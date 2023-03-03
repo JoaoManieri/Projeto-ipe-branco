@@ -16,14 +16,12 @@ import br.com.manieri.ipe_branco.util.Constants.Companion.UP_VOTE_SETED
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 
 
 //Assim - Teo?, Mirella Costa (song)
-
+//Water - SunniColón (song)
 
 class DiscussionViewModel : ViewModel() {
 
@@ -37,15 +35,15 @@ class DiscussionViewModel : ViewModel() {
     }
 
     fun setVote(
-        user_unique_uid: String,
         discussion_unique_uid: String,
         vote_type: Int
     ) {
 
-        val old_vote = getVote(user_unique_uid, discussion_unique_uid)
+        val old_vote = getVote(AppDataBase.getInstance().userDao().getToken(), discussion_unique_uid)
+        val user_unique_uid = AppDataBase.getInstance().userDao().getToken()
 
         if (old_vote == UP_VOTE_SETED && vote_type == DOWN_VOTE_SETED) {
-            fireStore.collection("VotesController").document(discussion_unique_uid).update(
+            fireStore.collection("Discussion").document(discussion_unique_uid).update(
                 mapOf(
                     "up_votes" to FieldValue.increment(-1),
                     "down_votes" to FieldValue.increment(1)
@@ -56,7 +54,7 @@ class DiscussionViewModel : ViewModel() {
                     mapOf("vote_type" to DOWN_VOTE_SETED)
                 )
         } else if (old_vote == DOWN_VOTE_SETED && vote_type == UP_VOTE_SETED) {
-            fireStore.collection("VotesController").document(discussion_unique_uid).update(
+            fireStore.collection("Discussion").document(discussion_unique_uid).update(
                 mapOf(
                     "down_votes" to FieldValue.increment(-1),
                     "up_votes" to FieldValue.increment(1)
@@ -74,6 +72,20 @@ class DiscussionViewModel : ViewModel() {
                     "vote_type" to vote_type
                 )
             )
+            if (vote_type == UP_VOTE_SETED){
+                fireStore.collection("Discussion").document(discussion_unique_uid).update(
+                    mapOf(
+                        "up_votes" to FieldValue.increment(1)
+                    )
+                )
+            }
+            else if (vote_type == DOWN_VOTE_SETED){
+                fireStore.collection("Discussion").document(discussion_unique_uid).update(
+                    mapOf(
+                        "down_votes" to FieldValue.increment(1)
+                    )
+                )
+            }
         }
     }
 
@@ -81,24 +93,12 @@ class DiscussionViewModel : ViewModel() {
         user_unique_uid: String,
         discussion_unique_uid: String
     ): Int {
-        var vote = 0
-        GlobalScope.launch(Dispatchers.IO) {
-            val document = "$user_unique_uid+$discussion_unique_uid"
-
-            val doc = fireStore.collection("VotesController")
-            val data = doc.document(document)
-
-            data.get().addOnSuccessListener { it ->
-                if (it.data?.get("vote_type") != null) {
-                    Log.w(TAG, "getVote: ${it.data?.get("vote_type").toString()}")
-                    vote = it.data?.get("vote_type").toString().toInt()
-                }
-            }
-            Log.w(TAG, "getVote: $vote")
-
-
+        val req = runBlocking {
+            fireStore.collection("VotesController").document("$user_unique_uid+$discussion_unique_uid").get().addOnSuccessListener{}.await()
         }
-        return vote
+        val vote = req.data?.get("vote_type")
+        return if(vote != null) vote.toString().toInt()
+        else NO_VOTE
     }
 
 
@@ -131,13 +131,13 @@ class DiscussionViewModel : ViewModel() {
                     val upVote = it.data["up_votes"].toString()
                     val downVotes = it.data["down_votes"].toString()
 
-                    val userId = it.data["user_uid"].toString()
+                    val userId = AppDataBase.getInstance().userDao().getToken()
                     val uniqueId = it.data["unique_uid"].toString()
 
 
                     val discussion = Discussion(
                         discussion_uid = it.data["discussion_uid"]?.toString(),
-                        user_uid = userId,
+                        user_uid = it.data["user_uid"].toString(),
                         unique_uid = uniqueId,
                         type = QUESTION,
                         discution_title = it.data["discution_title"].toString(),

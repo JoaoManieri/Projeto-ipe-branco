@@ -20,7 +20,10 @@ import br.com.manieri.ipe_branco.util.Constants.Companion.TOP_ITEM_DISCUSSION
 import br.com.manieri.ipe_branco.util.Constants.Companion.TOP_ITEM_POSITION
 import br.com.manieri.ipe_branco.util.Constants.Companion.UP_VOTE_SETED
 
-class DiscutionAdapter(val discutionList: ArrayList<Discussion>, val viewModel: DiscussionViewModel) :
+class DiscutionAdapter(
+    val discutionList: ArrayList<Discussion>,
+    val viewModel: DiscussionViewModel
+) :
     RecyclerView.Adapter<DiscutionAdapter.ViewHolder>() {
 
 
@@ -34,10 +37,9 @@ class DiscutionAdapter(val discutionList: ArrayList<Discussion>, val viewModel: 
         } else if (viewType == LABEL_ITEM_DISCUSSION) {
             output = LayoutInflater.from(parent.context)
                 .inflate(R.layout.card_label_response, parent, false)
-        } else{
+        } else {
             output = LayoutInflater.from(parent.context)
                 .inflate(R.layout.card_responses, parent, false)
-
         }
         return ViewHolder(output, viewType)
     }
@@ -57,19 +59,20 @@ class DiscutionAdapter(val discutionList: ArrayList<Discussion>, val viewModel: 
 
             val vote = discutionList[position].userVote
 
-            if (vote == UP_VOTE_SETED){
+            if (vote == UP_VOTE_SETED) {
                 holder.upVote.setImageResource(R.drawable.positive_vote)
             }
 
-            if (vote == DOWN_VOTE_SETED){
+            if (vote == DOWN_VOTE_SETED) {
                 holder.downVote.setImageResource(R.drawable.negative_vote)
             }
 
             holder.upVote.setOnClickListener {
                 discutionList[position].unique_uid?.let { it1 ->
-                    viewModel.setVote(discutionList[position].user_uid,
+                    viewModel.setVote(
                         it1,
-                        UP_VOTE_SETED)
+                        UP_VOTE_SETED
+                    )
                 }
                 holder.downVote.setImageResource(R.drawable.neutral_negative)
                 holder.upVote.setImageResource(R.drawable.positive_vote)
@@ -78,9 +81,10 @@ class DiscutionAdapter(val discutionList: ArrayList<Discussion>, val viewModel: 
 
             holder.downVote.setOnClickListener {
                 discutionList[position].unique_uid?.let { it1 ->
-                    viewModel.setVote(discutionList[position].user_uid,
+                    viewModel.setVote(
                         it1,
-                        DOWN_VOTE_SETED)
+                        DOWN_VOTE_SETED
+                    )
                 }
                 holder.upVote.setImageResource(R.drawable.neutral_positive)
                 holder.downVote.setImageResource(R.drawable.negative_vote)
@@ -90,11 +94,23 @@ class DiscutionAdapter(val discutionList: ArrayList<Discussion>, val viewModel: 
             holder.bodyResponse.text = discutionList[position].body_question
             holder.name_user_question.text = discutionList[position].userName
 
+
+            val vote = discutionList[position].userVote
+
+            if (vote == UP_VOTE_SETED) {
+                holder.upVote.setImageResource(R.drawable.positive_vote)
+            }
+
+            if (vote == DOWN_VOTE_SETED) {
+                holder.downVote.setImageResource(R.drawable.negative_vote)
+            }
+
             holder.upVote.setOnClickListener {
                 discutionList[position].unique_uid?.let { it1 ->
-                    viewModel.setVote(discutionList[position].user_uid,
+                    viewModel.setVote(
                         it1,
-                        UP_VOTE_SETED)
+                        UP_VOTE_SETED
+                    )
                 }
                 holder.downVote.setImageResource(R.drawable.neutral_negative)
                 holder.upVote.setImageResource(R.drawable.positive_vote)
@@ -102,9 +118,10 @@ class DiscutionAdapter(val discutionList: ArrayList<Discussion>, val viewModel: 
 
             holder.downVote.setOnClickListener {
                 discutionList[position].unique_uid?.let { it1 ->
-                    viewModel.setVote(discutionList[position].user_uid,
+                    viewModel.setVote(
                         it1,
-                        DOWN_VOTE_SETED)
+                        DOWN_VOTE_SETED
+                    )
                 }
                 holder.upVote.setImageResource(R.drawable.neutral_positive)
                 holder.downVote.setImageResource(R.drawable.negative_vote)

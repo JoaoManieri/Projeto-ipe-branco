@@ -4,12 +4,15 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.manieri.ipe_branco.dataBase.AppDataBase
 import br.com.manieri.ipe_branco.model.structure.Discussion
 import br.com.manieri.ipe_branco.util.Constants.Companion.NO_VOTE
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 
 class MainFragmentViewModel : ViewModel() {
 
@@ -20,21 +23,16 @@ class MainFragmentViewModel : ViewModel() {
 
     fun getVote(
         user_unique_uid: String,
-        discussion_unique_uid: String,
+        discussion_unique_uid: String
     ): Int {
-
-        var vote = NO_VOTE
-
-        val doc = fireStore.collection("VotesController")
-        val data = doc.whereEqualTo(user_unique_uid, discussion_unique_uid).limit(40)
-        data.get().addOnSuccessListener { it ->
-            it.forEach {
-                vote = it.data["vote_type"].toString().toInt()
-            }
+        val req = runBlocking {
+            fireStore.collection("VotesController").document("$user_unique_uid+$discussion_unique_uid").get().addOnSuccessListener{}.await()
         }
-
-        return vote
+        val vote = req.data?.get("vote_type")
+        return if(vote != null) vote.toString().toInt()
+        else NO_VOTE
     }
+
 
     fun getQuestionList() {
 
@@ -60,9 +58,10 @@ class MainFragmentViewModel : ViewModel() {
                             down_votes = it.get("down_votes").toString().toInt(),
                             body_question = it.get("body_question").toString(),
                             userName = it.get("userName").toString(),
-                            userVote = getVote(it.get("user_uid").toString(), it.get("unique_uid").toString())
+                            userVote = getVote(AppDataBase.getInstance().userDao().getToken(), it.get("unique_uid").toString())
                         )
                     )
+                    Log.w(TAG, "getQuestionList: ${listDiscussion.get(0).userVote}")
                 }
 
                 ObserverListQuestion.postValue(listDiscussion)
