@@ -38,7 +38,7 @@ class InitDiscussionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val assuntos = arrayOf("Escolha um problema","Produto Tecnomtor", "Codigo de defeito", "Problema mecanico")
+        val assuntos = arrayOf("Escolha um problema","Produto Tecnomtor", "Codigo de defeito", "Problema mecanico", "problemas eletricos")
         binding.spinnerAssunto
         val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, assuntos)
         binding.spinnerAssunto.adapter = adapter
