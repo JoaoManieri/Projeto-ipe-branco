@@ -47,30 +47,31 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
+
+        viewModelDiscussion = ViewModelProvider(this)[DiscussionViewModel::class.java]
+        viewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        testerJoin()
+        //tester()
 
-        val list = arrayListOf<TopSearches>(
-            TopSearches(0, "P1900"),
-            TopSearches(1, "Ventoinha"),
-            TopSearches(2, "Rasther"),
-            TopSearches(3, "Scanner"),
-            TopSearches(4, "Cebolão")
-        )
+//        val list = arrayListOf<TopSearches>(
+//            TopSearches(0, "P1900"),
+//            TopSearches(1, "Ventoinha"),
+//            TopSearches(2, "Rasther"),
+//            TopSearches(3, "Scanner"),
+//            TopSearches(4, "Cebolão")
+//        )
 
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.topSearchesReciclerView.layoutManager = layoutManager
 
-        horizontalAdapter = HorizontalAdapter(list)
+        horizontalAdapter = HorizontalAdapter(viewModel.getTopSearches())
         binding.topSearchesReciclerView.adapter = horizontalAdapter
-
-        viewModelDiscussion = ViewModelProvider(this)[DiscussionViewModel::class.java]
-        viewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
 
         var mAdapter = QuestionsAdapter(arrayListOf(), selectCard)
         mainAdapter = mAdapter
@@ -105,25 +106,8 @@ class MainFragment : Fragment() {
 
     }
 
-    private fun testerJoin() {
-        Log.w(TAG, "testerJoin: Entrou", )
-        var db = FirebaseFirestore.getInstance()
-        db.collection("Discussion")
-            .document("AjRF4NMFOf3XfGGRRjmx").collection("VotesController").get().addOnSuccessListener {
-
-                it.forEach {
-                    Log.w(TAG, "testerJoin: ${it.data}", )
-                    
-                }
-//                val userId = it.data?.get("user_uid")
-//                val uniqueId = "fkuvklvAqJxgb5gNM1Kr" //it.data?.get("unique_uid")
-//
-//                db.collection("VotesController").document("${userId}+${uniqueId}").get().addOnSuccessListener {
-//
-//                    Log.w(TAG, "testerJoin: ${userId}+${uniqueId}", )
-//                    Log.w(TAG, "testerJoin: ${it.data}" )
-//                }
-            }
+    private fun tester() {
+        viewModel.getTopSearches()
     }
 
 

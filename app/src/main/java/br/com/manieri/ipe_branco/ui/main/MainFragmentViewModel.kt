@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.manieri.ipe_branco.dataBase.AppDataBase
 import br.com.manieri.ipe_branco.model.structure.Discussion
+import br.com.manieri.ipe_branco.model.structure.TopSearches
 import br.com.manieri.ipe_branco.util.Constants.Companion.NO_VOTE
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -26,11 +27,27 @@ class MainFragmentViewModel : ViewModel() {
         discussion_unique_uid: String
     ): Int {
         val req = runBlocking {
-            fireStore.collection("VotesController").document("$user_unique_uid+$discussion_unique_uid").get().addOnSuccessListener{}.await()
+            fireStore.collection("VotesController")
+                .document("$user_unique_uid+$discussion_unique_uid").get().addOnSuccessListener {}
+                .await()
         }
         val vote = req.data?.get("vote_type")
-        return if(vote != null) vote.toString().toInt()
+        return if (vote != null) vote.toString().toInt()
         else NO_VOTE
+    }
+
+    fun getTopSearches() : ArrayList<TopSearches> {
+
+        val topSearches = runBlocking {
+            fireStore.collection("HotTopcs").document("HotTopcs1").get().addOnSuccessListener {}.await()
+        }
+        return arrayListOf(
+            TopSearches(1, topSearches.data?.get("ht1").toString()),
+            TopSearches(2, topSearches.data?.get("ht2").toString()),
+            TopSearches(3, topSearches.data?.get("ht3").toString()),
+            TopSearches(4, topSearches.data?.get("ht4").toString()),
+            TopSearches(5, topSearches.data?.get("ht5").toString()),
+        )
     }
 
 
@@ -58,7 +75,10 @@ class MainFragmentViewModel : ViewModel() {
                             down_votes = it.get("down_votes").toString().toInt(),
                             body_question = it.get("body_question").toString(),
                             userName = it.get("userName").toString(),
-                            userVote = getVote(AppDataBase.getInstance().userDao().getToken(), it.get("unique_uid").toString())
+                            userVote = getVote(
+                                AppDataBase.getInstance().userDao().getToken(),
+                                it.get("unique_uid").toString()
+                            )
                         )
                     )
                     Log.w(TAG, "getQuestionList: ${listDiscussion.get(0).userVote}")
