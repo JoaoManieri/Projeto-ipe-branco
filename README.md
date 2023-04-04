@@ -1,23 +1,37 @@
-# Projeto Ipe-Branco
-## Sobre: 
-Porque Ipê-Branco? Eu decidi nomear meus projetos com nomes populares e nomes científicos de árvores típicas da fauna brasileira (Meu país de origem) e em homenagem a minha futura esposa Beatriz que é bióloga! 
+<h1 align="center">Projeto Ipê-Branco</h1>
 
-Do que se trata o projeto: O projeto Ipê-Branco é um app de smartfones com sistema operacional android que tem por objetivo final servir como um fórum de reparadores automotivos para que estes possam participar de uma comunidade harmoniosa trocando informações visando melhorar o trabalho do dia a dia dessas pessoas 
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.8-blue.svg" alt="Kotlin">
+  <img src="https://img.shields.io/badge/platform-Android-green.svg" alt="Platform">
+  <img src="https://img.shields.io/badge/release-v1.0-orange.svg" alt="Release">
+</p>
 
-## Motivação:
- - A motivação inicial foi a busca despretensiosa de aprendizado. Entretanto com o andamento do projeto, e o potencial embutido no mesmo, foi percebido uma oportunidade de utilização em situações reais.  
+O projeto Ipê-Branco é um aplicativo para smartphones com sistema operacional Android, que tem como objetivo criar uma comunidade harmoniosa de reparadores automotivos, permitindo a troca de informações e a melhoria do trabalho diário desses profissionais.
 
- ## Objetivos:
- - O Aplicativo tem por objetivo principal promover uma comunidade de reparadores de veículos, por meio de um fórum inspirado em um grande fórum on-line, o Stack Overflow.
+## Sobre:
+Porque Ipê-Branco? Eu decidi nomear meus projetos com nomes populares e nomes científicos de árvores típicas da fauna brasileira (Meu país de origem) e em homenagem a minha futura esposa Beatriz que é bióloga!
 
-## Principais funcionalidades:
+Do que se trata o projeto: O projeto Ipê-Branco é um app de smartfones com sistema operacional android que tem por objetivo final servir como um fórum de reparadores automotivos para que estes possam participar de uma comunidade harmoniosa trocando informações visando melhorar o trabalho do dia a dia dessas pessoas
 
-- O app foi criado e pensado para cada usuário possuir um registro próprio. Desta forma é possível que cada um inicie tópicos diferentes e debata com outros reparadores sobre aquele tópico de forma independente.
+## Motivação
+A motivação inicial do projeto foi a busca de aprendizado, mas com o tempo, foi percebida uma oportunidade de utilização em situações reais.
 
-- É possível que cada usuário inicie discussões que podem ser pertinentes à outros, gerando assim um ecossistema de ajuda mútua. 
-- Assim, é possível criar discussões, responder perguntas e votar nas perguntas e respostas mais pertinentes.
+## Objetivos
+O principal objetivo do aplicativo é promover uma comunidade de reparadores de veículos por meio de um fórum inspirado no Stack Overflow.
 
-- O sistema de votos serve para elencar as melhores perguntas e as melhores respostas. 
+## Funcionalidades
+O aplicativo permite que cada usuário tenha um registro próprio para iniciar tópicos e debater com outros reparadores de forma independente. Além disso, é possível criar discussões, responder perguntas e votar nas perguntas e respostas mais pertinentes.
+
+As principais funcionalidades do aplicativo incluem:
+
+- Criação de tópicos de discussão
+- Respostas a tópicos de discussão
+- Votação nas perguntas e respostas mais pertinentes
+
+## Por que Ipê-Branco?
+O nome Ipê-Branco foi escolhido como uma homenagem à fauna brasileira e à minha futura esposa Beatriz, que é bióloga.
+
+Se você quiser saber mais sobre o projeto, confira o [repositório do
 
 
 <table>
