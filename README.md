@@ -1,7 +1,7 @@
 <h1 align="center">Projeto Ipê-Branco</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/python-3.8-blue.svg" alt="Kotlin">
+  <img src="https://img.shields.io/badge/Kotlin-blue.svg" alt="Kotlin">
   <img src="https://img.shields.io/badge/platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/release-v1.0-orange.svg" alt="Release">
 </p>
